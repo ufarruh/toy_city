@@ -34,7 +34,7 @@ puts "|_|                                       "
     puts "Sales: $#{el["purchases"][0]["price"] + el["purchases"][1]["price"]}"
     aver_price = (el["purchases"][0]["price"] + el["purchases"][1]["price"]) / el["purchases"].length
     puts "Average price: $#{aver_price}"
-    aver_discount = el["full-price"].to_i - aver_price
+    aver_discount = el["full-price"].to_f - aver_price
     puts "Average discount: $#{aver_discount.round(3)}"
     puts " "
     puts " "
@@ -75,14 +75,14 @@ brands.each do |brand|
   these_products = products_hash["items"].select { |item| item["brand"] == brand }
   toys = these_products.length
 
-  products.each do |product|
+  these_products.each do |product|
     stock = stock + product["stock"]
     price = price + product["full-price"].to_f
-      sales = sales + product["purchases"].length
-
-    # Count and print the number of the brand's toys we stock
-    puts "Toys in stock: #{product["stock"]}" if product["brand"] == brand
+    sales = sales + product["purchases"].length
   end
+    # Count and print the number of the brand's toys we stock
+    puts "Toys in stock: #{stock}"
+
 
   # Calculate and print the average price of the brand's toys
   puts "Average Price of Toy: $#{(price / toys).round(2)}"
