@@ -76,9 +76,13 @@ brands.each do |brand|
   toys = these_products.length
 
   these_products.each do |product|
-    stock = stock + product["stock"]
-    price = price + product["full-price"].to_f
-    sales = sales + product["purchases"].length
+    stock += product["stock"]
+    price += product["full-price"].to_f
+
+    product["purchases"].each do |sold|
+      sales += sold["price"]
+    end
+
   end
     # Count and print the number of the brand's toys we stock
     puts "Toys in stock: #{stock}"
@@ -88,7 +92,7 @@ brands.each do |brand|
   puts "Average Price of Toy: $#{(price / toys).round(2)}"
 
   # Calculate and print the total revenue of all the brand's toy sales combined
-  puts "Toys sold: #{sales}"
+  puts "Total revenue: $#{sales.round(2)}"
 
   puts " "
 end
